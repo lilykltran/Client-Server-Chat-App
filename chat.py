@@ -15,7 +15,7 @@ class Menu:
     def __init__(self):
         self.rooms = {} 
         self.roomMap = {}
-	self.members_map = {}
+	self.membersMap = {}
 
     def welcome(self, member):
         member.socket.sendall(b'Please enter in a nickname:\n')
@@ -30,7 +30,7 @@ class Menu:
             name = message .split()[1]
             member.name = name
             print(member.name + ' connected')
-	    self.members_map[member.name]=member
+	    self.membersMap[member.name]=member
             member.socket.sendall(instructions)
 
         elif caseNum[0] == '1':
@@ -74,7 +74,7 @@ class Menu:
                 if member.name+"-"+switchroomname in self.roomMap:
                     member.currentRoom = switchroomname
                 else:
-                    message = "you are not in entered room please join"
+                    message = "You are not currently a member of this room. Type in: \n\n2. [roomname] to join."
                     member.socket.sendall(message.encode())
             else:
                 member.socket.sendall(instructions)
